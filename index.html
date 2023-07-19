@@ -1,50 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tribute page</title>
+    <meta name="TO DO LIST" content="RIYA DHARSANDIYA">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <title>todo list</title>
     <style>
-        .head
-        {
-            margin-left:480px;
-        }
-        #pic
-        {
-            float :right;
-        }
-        .body
-        {
-            display: flex;
-            justify-content: space-between;
-            color:white;
-            background-color: black;
+        *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    height: 100vh;
+    background-image: url(todo.png);
+    
+    background-size: cover;
 
-        }
-        .quote
-        {
-            margin-top:100px;
-            margin-left:200px;
-            font-size: 20px;
-        }
-        
-    </style>
+}
+.container
+{
+    border: 2px solid white;
+    width: 40%;
+    min-width: 450px;
+    position: relative;
+    top: 100px;
+    left:400px;
+    padding: 30px 40px;
+}
+.newtask
+{
+    background-color: white;
+    padding: 30px 20px;
+    border-radius: 5px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+.newtask input{
+    width:70%;
+    height: 45px;
+    font-family:'Poppins',sans-serif;
+    font-size: 15px;
+    border: 2 px solid white;
+    padding:12px;
+    color: black;
+}
+.newtask button
+{
+    position: relative;
+    float: right;
+    width: 20%;
+    height:45px;
+    font-family:"Poppins",sans-serif ;
+    font-size: 16px;
+    border: none;
+    background-color :dodgerblue;
+    border-radius: 5px;
+    cursor: pointer;
+}   
+.task{
+    background-color: white;
+    padding: 30px 20px;
+    margin-top:10px ;
+    margin-bottom: 10px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    width:100%;
+    border-radius: 10px;}
+.tasks{
+    display: flex;
+    justify-content:space-between;
+    border-bottom: 1px solid black;
+    font-size: 20px;
+    margin-top: 10px;
+    padding: 5px 10px;
+}
+.tasks button{
+    width:40px;
+    height:100%;
+    background-color :dodgerblue;
+    border-radius: 5px;
+}
+.completed{
+    text-decoration: line-through;
+    cursor: pointer;
+}
+        </style>
 </head>
 <body>
-    <div class="head">
-        <h1 class="main-heading">Dr. A.P.J. Abdul Kalam</h1>
-        <h2 class="sub-heading">" Missile Man of India , The People's President "</h2>
+    <div class="container">
+        <div class="newtask">
+            <input type="text" placeholder="task to be done..">
+            <button id="push">Add</button>
+        </div>
+        <div class="task"></div>
     </div>
-    <div class="body">
-       <div> <h4 class="quote"><pre>Dream, Dream, Dream. Dreams transform into 
-                thoughts and thoughts result in action.</pre></h4></div>
-    <div><img src="pic1.jpg" id="pic" width="300px" height="400px">    </div>
+    <script>
+        document.querySelector('#push').onclick=function(){
+  if(document.querySelector('.newtask input').value.length==0){
+    alert('please enter a task')
+  }
+  else{
+    document.querySelector('.task').innerHTML
+    +=`
+    <div class="tasks">
+    <span id='taskname'>
+        ${document.querySelector(".newtask input").value}
+   </span> 
+   <button class="del">
+   <i class="fa fa-times"></i>
+   </button>
     </div>
-    <center>
-    <div >
-        <h2 class="footer">Biography</h2>
-        <p class="info">A.P.J. Abdul Kalam, in full Avul Pakir Jainulabdeen Abdul Kalam, (born October 15, 1931, Rameswaram, India—died July 27, 2015, Shillong), Indian scientist and politician who played a leading role in the development of India’s missile and nuclear weapons programs. He was president of India from 2002 to 2007.Kalam earned a degree in aeronautical engineering from the Madras Institute of Technology and in 1958 joined the Defence Research and Development Organisation (DRDO). In 1969 he moved to the Indian Space Research Organisation, where he was project director of the SLV-III, the first satellite launch vehicle that was both designed and produced in India. Rejoining DRDO in 1982, Kalam planned the program that produced a number of successful missiles, which helped earn him the nickname “Missile Man.” Among those successes was Agni, India’s first intermediate-range ballistic missile, which incorporated aspects of the SLV-III and was launched in 1989.</p>
-    </div>
-    </center>
+    `;
+  }
+
+var current_task=document.querySelectorAll('.del');
+for (var i=0;i<current_task.length;i++)
+{
+    current_task[i].onclick=function(){
+        this.parentNode.remove();
+    }
+}
+var tasks=document.querySelectorAll('.tasks');
+for(var i=0;i<tasks.length;i++)
+{
+    tasks[i].onclick=function(){
+        this.classList.toggle('completed');
+    }
+}
+document.querySelector('.newtask input').value='';
+}
+    </script>
 </body>
 </html>
